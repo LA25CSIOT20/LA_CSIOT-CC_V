@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JT Phase 2 REST Docs</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#eld-api-documentation">ELD API Documentation</a>
+<ul>
+<li><a href="#gatewayschema-api">1. GatewaySchema API</a></li>
+<li><a href="#gatewayaccount-api">2. GatewayAccount API</a></li>
+<li><a href="#mappings-api">3. Mappings API</a></li>
+<li><a href="#assets-api">4. Assets API</a></li>
+<li><a href="#response-format">Response Format</a></li>
+<li><a href="#error-handling">Error Handling</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="eld-api-documentation">ELD API Documentation</h1>
+<h2 id="gatewayschema-api">1. GatewaySchema API</h2>
+<h3 id="create-gateway-schema">1.1 Create Gateway Schema</h3>
+<p>Creates a new gateway schema with provider configuration.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/gatewaySchema</code><br>
+<strong>Method:</strong> POST<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>Content-Type</code>: application/json</li>
+</ul>
+<p><strong>Request Body:</strong></p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"gatewayName"</span><span class="token punctuation">:</span> <span class="token string">"ELD_Name"</span><span class="token punctuation">,</span>
+    <span class="token string">"providerName"</span><span class="token punctuation">:</span> <span class="token string">"ELD_Name"</span><span class="token punctuation">,</span>
+    <span class="token string">"gatewayProperties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"username"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"string"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"string"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"apiKey"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"password"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"String"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"token"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"password"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"String"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"automaticSetup"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"checked"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"checkbox"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"Boolean"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"automaticSharing"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"checked"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"checkbox"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"Boolean"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"assetType"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"label"</span><span class="token punctuation">:</span> <span class="token string">"Select Value"</span><span class="token punctuation">,</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"dropdown"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"Integer"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="get-gateway-schema">1.2 Get Gateway Schema</h3>
+<p>Retrieves schema information for a specific provider.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/gatewaySchema</code><br>
+<strong>Method:</strong> GET<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>providerId</code>: Required - Provider identifier</li>
+<li><code>Content-Type</code>: application/json</li>
+</ul>
+<h3 id="update-gateway-schema">1.3 Update Gateway Schema</h3>
+<p>Updates an existing gateway schema configuration.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/gatewaySchema</code><br>
+<strong>Method:</strong> PATCH<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>providerId</code>: Required - Provider identifier</li>
+<li><code>Content-Type</code>: application/json</li>
+</ul>
+<p><strong>Request Body:</strong></p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"gatewayProperties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"username"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"string"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"string"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"apiKey"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"password"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"String"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"automaticSetup"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"checked"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"checkbox"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"Boolean"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"automaticSharing"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"checked"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"checkbox"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"Boolean"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"assetType"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"label"</span><span class="token punctuation">:</span> <span class="token string">"Select Value"</span><span class="token punctuation">,</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"dropdown"</span><span class="token punctuation">,</span>
+            <span class="token string">"valueType"</span><span class="token punctuation">:</span> <span class="token string">"Integer"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="gatewayaccount-api">2. GatewayAccount API</h2>
+<h3 id="create-account">2.1 Create Account</h3>
+<p>Creates a new gateway account.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/account</code><br>
+<strong>Method:</strong> POST<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>portalId</code>: Required - Portal identifier</li>
+<li><code>Accept</code>: application/json</li>
+<li><code>Content-Type</code>: application/json</li>
+</ul>
+<p><strong>Request Body:</strong></p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"string"</span><span class="token punctuation">,</span>
+    <span class="token string">"gatewayId"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">"providerId"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">"gatewayProperties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"apiKey"</span><span class="token punctuation">:</span> <span class="token string">"lkkl32-k900977-2341nljg8uhjo"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"automaticSetup"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="update-account">2.2 Update Account</h3>
+<p>Updates an existing gateway account.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/account</code><br>
+<strong>Method:</strong> PATCH<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>portalId</code>: Required - Portal identifier</li>
+<li><code>Accept</code>: application/json</li>
+<li><code>Content-Type</code>: application/json</li>
+</ul>
+<p><strong>Request Body:</strong></p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token number">123</span><span class="token punctuation">,</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Sample Account"</span><span class="token punctuation">,</span>
+    <span class="token string">"gatewayId"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">"providerId"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token string">"gatewayProperties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"apiKey"</span><span class="token punctuation">:</span> <span class="token string">"lkkl32-k900977-2341nljg8uhjo"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"automaticSetup"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="delete-account">2.3 Delete Account</h3>
+<p>Deletes a specific gateway account.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/account/{account_id}</code><br>
+<strong>Method:</strong> DELETE<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>portalId</code>: Required - Portal identifier</li>
+<li><code>Accept</code>: application/json</li>
+<li><code>account_id</code>: Required - Account identifier</li>
+</ul>
+<h2 id="mappings-api">3. Mappings API</h2>
+<h3 id="get-mapping-list">3.1 Get Mapping List</h3>
+<p>Retrieves all mappings for a specific gateway.</p>
+<p><strong>Endpoint:</strong> <code>/gateways/{gatewayid}/mappings</code><br>
+<strong>Method:</strong> GET<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>Accept</code>: application/json</li>
+<li><code>gatewayid</code>: Required - Gateway identifier</li>
+</ul>
+<h3 id="update-mapping">3.2 Update Mapping</h3>
+<p>Updates gateway mappings configuration.</p>
+<p><strong>Endpoint:</strong> <code>/gateways/{gatewayid}/mappings</code><br>
+<strong>Method:</strong> PUT<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>Accept</code>: application/json</li>
+<li><code>Content-Type</code>: application/json</li>
+<li><code>gatewayid</code>: Required - Gateway identifier</li>
+</ul>
+<h3 id="delete-mapping">3.3 Delete Mapping</h3>
+<p>Deletes a specific mapping.</p>
+<p><strong>Endpoint:</strong> <code>/gateways/{gatewayid}/mappings/{map_id}</code><br>
+<strong>Method:</strong> DELETE<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>Accept</code>: application/json</li>
+<li><code>gatewayid</code>: Required - Gateway identifier</li>
+<li><code>map_id</code>: Required - Mapping identifier</li>
+</ul>
+<h2 id="assets-api">4. Assets API</h2>
+<h3 id="get-assets-list">4.1 Get Assets List</h3>
+<p>Retrieves a list of assets for a specific provider.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/assets</code><br>
+<strong>Method:</strong> GET<br>
+<strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>portalId</code>: Required - Portal identifier</li>
+<li><code>providerId</code>: Required - Provider identifier</li>
+<li><code>Accept</code>: application/json</li>
+</ul>
+<h3 id="get-latest-asset-data">4.2 Get Latest Asset Data</h3>
+<p>Retrieves the most recent data for a specific asset.</p>
+<p><strong>Endpoint:</strong> <code>/api/v1/latestAssetData</code><br>
+<strong>Method:</strong> GET<br>
+<strong>Query Parameters:</strong></p>
+<ul>
+<li><code>assetId</code>: Required - Asset identifier</li>
+</ul>
+<p><strong>Headers:</strong></p>
+<ul>
+<li><code>oauthToken</code>: Required - Authentication token</li>
+<li><code>providerId</code>: Required - Provider identifier</li>
+<li><code>Accept</code>: application/json</li>
+</ul>
+<h2 id="response-format">Response Format</h2>
+<p>All API responses are wrapped in a standard HTTP response format:</p>
+<pre class=" language-xml"><code class="prism  language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jtHTTPResponse</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>responseBody</span><span class="token punctuation">&gt;</span></span><span class="token cdata">&lt;![CDATA[
+        {
+            // JSON response content
+        }
+    ]]&gt;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>responseBody</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>responseCode</span><span class="token punctuation">&gt;</span></span>status_code<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>responseCode</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jtHTTPResponse</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h2 id="error-handling">Error Handling</h2>
+<p>All endpoints follow standard HTTP status codes:</p>
+<ul>
+<li>200: Success</li>
+<li>400: Bad Request</li>
+<li>401: Unauthorized</li>
+<li>403: Forbidden</li>
+<li>404: Not Found</li>
+<li>500: JT Internal Server Error</li>
+</ul>
+<p>Error responses include a message and status in the response body:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"jtresponse"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"messages"</span><span class="token punctuation">:</span> <span class="token string">"Error description"</span><span class="token punctuation">,</span>
+        <span class="token string">"status"</span><span class="token punctuation">:</span> <span class="token string">"Failure"</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+    </div>
+  </div>
+</body>
+
+</html>
